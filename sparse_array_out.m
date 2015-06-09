@@ -13,7 +13,8 @@ function opened = sparse_array_out (A, name)
 %   number of non-zero elements in the array.
 %   2. Then each non-zero element of the array is represented by
 %   two uint32 scalars and a double scalar in the file in this
-%   order: its row index (uint32), its column index (uint32),
+%   order: 
+%   its row index (uint32), its column index (uint32),
 %   and its value (double).
 
 % get the file ID with reading & writing granted
@@ -26,13 +27,20 @@ else
     opened = true;
 end
 
-% push the row-col nums
+% push the row-col nums - elements > 0
 dims = size(A);
-fdims = [dims, ]
+nonzero = size(A(A ~= 0), 1);
+scalar = [dims, nonzero];
 
-fwrite(fid, length(dims), 'uint32');
+% fwrite(fid, length(scalar), 'uint32');
+fwrite(fid, scalar, 'uint32');
 
-% push the elements num
-
-
+% write the data
+fwrite(fid, size(A(A ~= 0), 1), 'uint32');
+fwrite(fid, size(A(A ~= 0), 2), 'uint32');
+fwrite(fid, A(A ~= 0), 'double');
+fclose(fid);
 end
+
+
+
