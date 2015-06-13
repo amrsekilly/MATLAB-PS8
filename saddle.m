@@ -31,5 +31,36 @@ function ind = saddle (M)
 %     end
 %     ind = [maxRow', maxCol'];   
 
+    maxRow = [];
+    maxCol = [];
+    for i = 1 : size(M, 1)
+     %   for j = 1 : size(M, 2)
+            % get the col index of the largest num in a row
+            [~, c] = max(M(i,:));
+            % if that number is also the minimum of all cols
+            if max(M(i,:)) == min(M(:, c))
+                % get it's indeces
+                maxRow(end+1) = i;
+                maxCol(end+1) = c;
+            end
+          
+       % end
+    end
 
+        for i = 1 : size(M, 2)
+     %   for j = 1 : size(M, 2)
+            % get the col index of the largest num in a row
+            [~, r] = max(M(:, i));
+            % if that number is also the minimum of all cols
+            if max(M(:, i)) == min(M(r, :))
+                % get it's indeces
+                maxRow(end+1) = r;
+                maxCol(end+1) = i;
+            end
+          
+       % end
+    end
+
+    
+ind = [maxRow', maxCol'];
 end
