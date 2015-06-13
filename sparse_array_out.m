@@ -28,17 +28,20 @@ else
 end
 
 % push the row-col nums - elements > 0
-dims = size(A);
-nonzero = size(A(A ~= 0), 1);
-scalar = [dims, nonzero];
+% dims = size(A);
+% nonzero = size(A(A ~= 0), 1);
+% scalar = [dims, nonzero];
+% 
+% % fwrite(fid, length(scalar), 'uint32');
+% fwrite(fid, scalar, 'uint32');
+% 
+% % write the data
+% fwrite(fid, size(A(A ~= 0), 1), 'uint32');
+% fwrite(fid, size(A(A ~= 0), 2), 'uint32');
+% fwrite(fid, A(A ~= 0), 'double');
 
-% fwrite(fid, length(scalar), 'uint32');
-fwrite(fid, scalar, 'uint32');
 
-% write the data
-fwrite(fid, size(A(A ~= 0), 1), 'uint32');
-fwrite(fid, size(A(A ~= 0), 2), 'uint32');
-fwrite(fid, A(A ~= 0), 'double');
+
 fclose(fid);
 end
 
