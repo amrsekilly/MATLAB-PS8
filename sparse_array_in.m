@@ -6,7 +6,7 @@
 
 function A = sparse_array_in (filename)
 % get the file ID with reading & writing granted
-fid = fopen(name, 'w+');
+fid = fopen(filename, 'r');
 
 % validate fid
 if fid < 0  
@@ -22,17 +22,23 @@ col = fread(fid, 1, 'uint32');
 % get number of nz
 nz = fread(fid, 1, 'uint32');
 
-dim = [row, col];
+% % get the elements of A
+% for i = 1 : row
+%     for j = 1 : col
+%         rowInd = fread(fid, 1, 'uint32');
+%         colInd = fread(fid, 1, 'uint32');
+%         val = fread(fid, 1, 'double');
+%         
+%       %  if rowInd == i & colInd == j
+%             A(i, j) = val;
+%        % else
+%          %   A(i, j) = 0;
+%         %end
+%     end
+% end
 
-% get the elements of A
-for i = 1 : row
-    for j = 1 : col
-        rowInd = fread(fid, 1, 'uint32');
-        colInd = fread(fid, 1, 'uint32');
-        val = fread(fid, 1, 'double');
-    end
-end
 
+fclose(fid);
 end
 
 
