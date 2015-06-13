@@ -7,19 +7,21 @@ function ind = saddle (M)
 % saddle elem is
 % greater than all elems in it's row
 % ls all elems in it's col
+
     ind = [];
     maxRow = [];
     maxCol = [];
     for i = 1 : size(M, 1)
         for j = 1 : size(M, 2)
-            % get the largest in the nth row and smallest in nthe col
-            [maxRow(end+1), r] = max(M(i, :));
-            [maxCol(end+1), c] = min(M(:, j));
-            indn = [r, c];
+            % get the col index of the largest num in a row
+            [~, c] = max(M(i,:));
+            if max(M(i,:)) == min(M(:, c))
+                maxRow = i;
+                maxCol = c;
+            end
         end
     end
-    
-    
+    ind = [maxRow, maxCol];   
 end
 
 
