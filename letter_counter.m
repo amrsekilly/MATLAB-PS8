@@ -9,14 +9,16 @@ S = [];
 fid = fopen(filename, 'rt');
 if fid < 0 
     count = -1;
+    return
 end
 
 % raed the content
 content = fgets(fid);
 while ischar(content)
-    S(end+1) = content;
+    S(end+1) = length(content(isletter(content)));
     content = fgets(fid);
 end
+
 fclose(fid);
-count = length(S);
+count = sum(S);
 end
