@@ -27,20 +27,28 @@ else
     opened = true;
 end
 
-% push the row-col nums - elements > 0
-% dims = size(A);
-% nonzero = size(A(A ~= 0), 1);
-% scalar = [dims, nonzero];
-% 
-% % fwrite(fid, length(scalar), 'uint32');
-% fwrite(fid, scalar, 'uint32');
-% 
-% % write the data
-% fwrite(fid, size(A(A ~= 0), 1), 'uint32');
-% fwrite(fid, size(A(A ~= 0), 2), 'uint32');
-% fwrite(fid, A(A ~= 0), 'double');
+% array has n rows (uint32)
+fwrite(fid, size(A, 1), 'uint32');
 
+% array has n columns (uint32)
+fwrite(fid, size(A, 2), 'uint32');
 
+% there are n non-zero elements in the array (uin32)
+fwrite(fid, size(A(A ~= 0), 1), 'uint32');
+
+% non-zero elements ordered
+% 1st nz row index (uint32)
+% 1st nz col ind (uint32)
+% 1st nz val (double)
+for i = 1 : size(A, 1) % row loop
+    for j = 1 : size(A, 2) % col loop
+        if A(i, j) ~= 0 % add that value
+            fwrite(fid, i, 'uint32');
+            fwrite(fid, j, 'uint32');
+            fwrite(fid, A(i, j), 'double');
+        end
+    end
+end
 
 fclose(fid);
 end
