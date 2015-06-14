@@ -25,7 +25,7 @@ for i = 1 : size(M, 1)
 end
 
 % find all the elements of a coloumn that has same val
-for i = 2 : length(maxRow)
+for i = 1 : length(maxRow)
     [r, c, ~]= find(M == M(maxRow(i), maxCol(i)));
     maxRow = r';
     maxCol = c';
