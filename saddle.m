@@ -50,14 +50,14 @@ function ind = saddle (M)
     end
 
 % loop over all cols found in maxCol
-for j = 2 : length(maxCol)
+for j = 2 : length(maxCol)-1
     % loop over all rows of found element
     for i = 1 : size(M, 1)
         % if the current element of the same row index has the same col
         % index.. then add it's indeces
         if M(i, maxCol(j)) == vale(j)
             maxRow(end+1) = i;
-            maxCol(end+1) = j;
+            maxCol(end+1) = (j);
         end
     end
 end
