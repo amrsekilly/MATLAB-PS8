@@ -49,19 +49,35 @@ function ind = saddle (M)
        % end
     end
 
- % loop over all row of found maxs
- for i = 1 : length(maxRow)
-     % loop over all cols of found maxRows
-     for j = 1 : size(M, 2)
-         % check if the value of any element in all of the cols = val of
-         % element
-         if M(maxRow(i), j) == vale(i)
-             % add the index of that element to the index output
-             maxRow(end+1) = maxRow(i);
-             maxCol(end+1) = j;
-         end
-     end
- end
+% loop over all cols found in maxCol
+for j = 2 : length(maxCol)
+    % loop over all rows of found element
+    for i = 1 : size(M, 1)
+        % if the current element of the same row index has the same col
+        % index.. then add it's indeces
+        if M(i, maxCol(j)) == vale(j)
+            maxRow(end+1) = i;
+            maxCol(end+1) = j;
+        end
+    end
+end
+    
+    
+    
+    
+%  % loop over all row of found maxs
+%  for i = 1 : length(maxRow)
+%      % loop over all cols of found maxRows
+%      for j = 1 : size(M, 2)
+%          % check if the value of any element in all of the cols = val of
+%          % element
+%          if M(maxRow(i), j) == vale(i)
+%              % add the index of that element to the index output
+%              maxRow(end+1) = maxRow(i);
+%              maxCol(end+1) = j;
+%          end
+%      end
+%  end
     
 ind = [maxRow', maxCol'];
 end
