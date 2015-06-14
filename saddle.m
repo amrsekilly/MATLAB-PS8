@@ -13,7 +13,6 @@ maxRow = [];
 maxCol = [];
 vale = [];
 for i = 1 : size(M, 1)
-    %   for j = 1 : size(M, 2)
     % get the col index of the largest num in a row
     [~, c] = max(M(i,:));
     % if that number is also the minimum of all cols
@@ -23,16 +22,13 @@ for i = 1 : size(M, 1)
         maxCol(end+1) = c;
         vale(end+1) = M(i, c);
     end
-    
-    % end
 end
 
 % find all the elements of a coloumn that has same val
 for i = 2 : length(maxRow)
     [r, c, ~]= find(M == M(maxRow(i), maxCol(i)));
-    maxRow = [ r'];
-    maxCol = [ c'];
+    maxRow = r';
+    maxCol = c';
 end
-
 ind = [maxRow', maxCol'];
 end
