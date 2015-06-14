@@ -33,6 +33,7 @@ function ind = saddle (M)
 
     maxRow = [];
     maxCol = [];
+    vale = [];
     for i = 1 : size(M, 1)
      %   for j = 1 : size(M, 2)
             % get the col index of the largest num in a row
@@ -42,20 +43,21 @@ function ind = saddle (M)
                 % get it's indeces
                 maxRow(end+1) = i;
                 maxCol(end+1) = c;
+                vale(end+1) = M(i, c);
             end
           
        % end
     end
 
- % loop over all rows of found maxs
+ % loop over all row of found maxs
  for i = 1 : length(maxRow)
      % loop over all cols of found maxRows
      for j = 1 : size(M, 2)
          % check if the value of any element in all of the cols = val of
          % element
-         if M(i, j) == M(maxRow(i), maxCol(i))
+         if M(maxRow(i), j) == vale(i)
              % add the index of that element to the index output
-             maxRow(end+1) = i;
+             maxRow(end+1) = maxRow(i);
              maxCol(end+1) = j;
          end
      end
